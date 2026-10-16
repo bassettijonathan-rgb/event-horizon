@@ -1,0 +1,13 @@
+{
+  "name": "event-horizon",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Black holes and general relativity in the browser: ray-traced Kerr geodesics, orbits, tides, clocks and a merger chirp.",
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "test": "node --test test/*.test.mjs",
+    "build": "node tools/build-artifact.mjs --standalone"
+  },
+  "engines": { "node": ">=20" }
+}

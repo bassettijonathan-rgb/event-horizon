@@ -75,11 +75,15 @@ export function waveform({ m1, m2, z = 0, distanceMpc = 440, fLow = 20, fs = 409
   const t = [];
   const h = [];
   const f = [];
+  const amp = [];
+  const phase = [];
   let time = 0;
   while (v < vEnd && t.length < 1e7) {
     t.push(time);
     h.push(ampScale * v * v * Math.cos(2 * phi));
     f.push((v * v * v) / (Math.PI * M));
+    amp.push(ampScale * v * v);
+    phase.push(2 * phi);
     // RK4 on (v, φ).
     const k1v = vdot(v), k1p = (v * v * v) / M;
     const v2 = v + 0.5 * dt * k1v;
@@ -111,10 +115,12 @@ export function waveform({ m1, m2, z = 0, distanceMpc = 440, fLow = 20, fs = 409
       const s = Math.min(1, x / tRise);
       const ease = s * s * (3 - 2 * s);
       const freq = fIsco + (ring.f - fIsco) * ease;
-      const amp = x < tRise ? aIsco + (aPeak - aIsco) * ease : aPeak * Math.exp(-(x - tRise) / ring.tau);
+      const a = x < tRise ? aIsco + (aPeak - aIsco) * ease : aPeak * Math.exp(-(x - tRise) / ring.tau);
       t.push(time);
-      h.push(amp * Math.cos(gwPhase));
+      h.push(a * Math.cos(gwPhase));
       f.push(freq);
+      amp.push(a);
+      phase.push(gwPhase);
       gwPhase += 2 * Math.PI * freq * dt;
       time += dt;
     }
@@ -123,6 +129,8 @@ export function waveform({ m1, m2, z = 0, distanceMpc = 440, fLow = 20, fs = 409
     t: Float64Array.from(t),
     h: Float64Array.from(h),
     f: Float64Array.from(f),
+    amp: Float64Array.from(amp),
+    phase: Float64Array.from(phase),
     fs,
     tInspiralEnd,
     tPeak: merger ? tInspiralEnd + 12 * M : tInspiralEnd,

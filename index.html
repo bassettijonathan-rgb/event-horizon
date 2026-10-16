@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Event Horizon</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,500;0,6..96,700;1,6..96,500&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="src/app/style.css">
+</head>
+<body>
+<header class="top">
+  <h1 class="brand">Event Horizon <em>a probe around a black hole</em></h1>
+  <nav class="modes" id="modes" role="tablist" aria-label="Modes"></nav>
+</header>
+
+<main class="stage">
+  <section class="viewer" aria-label="Simulation">
+    <div class="screen" id="screen">
+      <canvas id="plot" class="layer" aria-hidden="true"></canvas>
+      <canvas id="gl" class="layer" aria-label="Live view. Drag to look around."></canvas>
+      <canvas id="hud" class="layer hud" aria-hidden="true"></canvas>
+      <div class="readout" id="readout" aria-live="polite"></div>
+      <div class="flypad" id="flypad" aria-label="Fly the probe">
+        <button class="pad" data-fly="in" title="Fly forward (W)">Forward</button>
+        <button class="pad" data-fly="out" title="Fly back (S)">Back</button>
+        <button class="pad" data-fly="look" title="Face the hole (F)">Face hole</button>
+      </div>
+      <div class="board" id="board" hidden></div>
+      <p class="fallback" id="fallback" hidden></p>
+    </div>
+    <div class="strip" id="strip"></div>
+  </section>
+
+  <aside class="side" id="side" aria-label="Controls and explanations">
+    <div id="panel"></div>
+    <section class="cards" aria-label="What you’re seeing">
+      <p class="eyebrow">What you’re seeing</p>
+      <div id="cards"></div>
+    </section>
+  </aside>
+</main>
+<script type="module" src="src/app/main.js"></script>
+</body>
+</html>

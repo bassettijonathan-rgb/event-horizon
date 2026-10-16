@@ -13,7 +13,13 @@
 // The state vector is [r, θ, φ, t, dr/dλ, dθ/dλ, τ]; τ is proper time for a
 // massive particle and the affine parameter for light.
 
-export const R = 0, TH = 1, PH = 2, T = 3, RD = 4, THD = 5, TAU = 6;
+export const R = 0;
+export const TH = 1;
+export const PH = 2;
+export const T = 3;
+export const RD = 4;
+export const THD = 5;
+export const TAU = 6;
 
 export function horizonRadius(a) {
   return 1 + Math.sqrt(Math.max(0, 1 - a * a));
